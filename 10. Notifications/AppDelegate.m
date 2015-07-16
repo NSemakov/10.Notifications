@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-
+#import "Government.h"
+#import "Doctor.h"
 @interface AppDelegate ()
 
 @end
@@ -17,9 +18,25 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //Uchenik
+    
+    Government* gov=[[Government alloc]init];
+    Doctor* doc1=[[Doctor alloc]init];
+    
+    NSNotificationCenter *nc=[NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(governmentNotification:) name:GovernmentSalaryDidChangeNotification object:nil];
+    
+    gov.salary=1040;
     return YES;
 }
-
+-(void) dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+-(void) governmentNotification:(NSNotification*) notification{
+    NSLog(@"gov notification user info:%@",notification.userInfo);
+    //to get number, should call object for key in addition.
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
