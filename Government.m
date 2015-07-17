@@ -36,5 +36,22 @@ NSString* const GovernmentAveragePriceDidChangeUserInfoKey=@"GovernmentAveragePr
     [[NSNotificationCenter defaultCenter] postNotificationName:GovernmentSalaryDidChangeNotification object:nil userInfo:dict];
     
 }
-
+-(void) setPension:(CGFloat)pension {
+    _pension=pension;
+    NSDictionary* dict=[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:pension], GovernmentPensionDidChangeUserInfoKey, nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:GovernmentPensionDidChangeNotification object:nil userInfo:dict];
+    
+}
+-(void) setTaxLevel:(CGFloat)taxLevel {
+    _taxLevel=taxLevel;
+    NSDictionary* dict=[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:taxLevel], GovernmentTaxLevelDidChangeUserInfoKey, nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:GovernmentTaxLevelDidChangeNotification object:nil userInfo:dict];
+    
+}
+-(void) setAveragePrice:(CGFloat)averagePrice {
+    _averagePrice=averagePrice;
+    NSDictionary* dict=[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:averagePrice], GovernmentAveragePriceDidChangeUserInfoKey, nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:GovernmentAveragePriceDidChangeNotification object:nil userInfo:dict];
+    
+}
 @end

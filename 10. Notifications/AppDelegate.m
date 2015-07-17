@@ -9,7 +9,13 @@
 #import "AppDelegate.h"
 #import "Government.h"
 #import "Doctor.h"
+#import "Pensioner.h"
+#import "Businessman.h"
 @interface AppDelegate ()
+@property (strong,nonatomic) Doctor* doctorProperty;
+@property (strong,nonatomic) Pensioner* pensProperty;
+@property (strong,nonatomic) Businessman* businProperty;
+@property (strong,nonatomic) Government* government;
 
 @end
 
@@ -21,21 +27,46 @@
     
     //Uchenik
     
-    Government* gov=[[Government alloc]init];
-    Doctor* doc1=[[Doctor alloc]init];
+    self.government=[[Government alloc]init];
+    
+    self.doctorProperty=[[Doctor alloc]init];
+    self.pensProperty=[[Pensioner alloc]init];
+    self.businProperty=[[Businessman alloc]init];
+    self.doctorProperty.averagePrice=self.pensProperty.averagePrice=self.businProperty.averagePrice=300.f;
     
     NSNotificationCenter *nc=[NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(governmentNotification:) name:GovernmentSalaryDidChangeNotification object:nil];
+    [nc addObserver:self selector:@selector(UIAppNotificationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    self.government.salary=1040.f;
+    self.government.pension=10000.f;
+    self.government.taxLevel=40.f;
+    self.government.averagePrice=1000.f;
     
-    gov.salary=1040;
+    //----------
+    //end of Uchenik
+    
+    //Umnichka
+    //----------
+    //end of Umnichka
+    
+    //Master
+    //code added to proper classes
+    
+    //----------
+    //end of Master
+    
     return YES;
 }
 -(void) dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+   // NSLog(@"dealloc appdelegate");
 }
 -(void) governmentNotification:(NSNotification*) notification{
     NSLog(@"gov notification user info:%@",notification.userInfo);
     //to get number, should call object for key in addition.
+}
+-(void) UIAppNotificationDidEnterBackground:(NSNotification*) notification {
+    NSLog(@"did enter 2 sleep");
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
